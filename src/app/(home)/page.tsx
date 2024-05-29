@@ -8,8 +8,8 @@ import { Separator } from "@/components/ui/separator";
 export default function Home() {
   const [section, setSection] = useState("customer");
   return (
-    <main className=" min-h-screen">
-      <div className="bg-gradient-to-r from-gray-800 to-gray-700 pb-24 pt-10  px-8 sm:px-24  ">
+    <main className=" dark:bg-gradient-to-r  dark:from-gray-800 min-h-screen">
+      <div className="bg-gradient-to-r from-gray-800 to-gray-700 dark:from-gray-800 dark:to-background pb-24 pt-10  px-8 sm:px-24  ">
         <section className="flex flex-col gap-3 sm:max-w-6xl mx-auto">
           <div className="flex items-center justify-between gap-3">
             <div
