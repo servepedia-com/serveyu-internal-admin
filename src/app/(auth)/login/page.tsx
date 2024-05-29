@@ -45,7 +45,7 @@ const LoginPage = () => {
           if (submitError) setSubmitError("");
         }}
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full sm:justify-center sm:w-[400px] space-y-6 flex flex-col"
+        className="w-full sm:justify-center sm:w-[400px] gap-5 flex flex-col"
       >
         <Link
           href="/"
