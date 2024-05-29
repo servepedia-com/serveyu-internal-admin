@@ -47,8 +47,7 @@ const LoginPage = () => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="w-full sm:justify-center sm:w-[400px] gap-5 flex flex-col"
       >
-        <Link
-          href="/"
+        <div
           className="
           w-full
           flex
@@ -60,9 +59,9 @@ const LoginPage = () => {
             className="font-semibold
           dark:text-white text-3xl first-letter:ml-3"
           >
-          ServeYouApps.
+            ServeYouApps.
           </span>
-        </Link>
+        </div>
         <FormDescription
           className="
         text-foreground/60"
