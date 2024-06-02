@@ -5,11 +5,12 @@ import Logo from "../../../public/cypresslogo.svg";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useState } from "react";
 import { Separator } from "@/components/ui/separator";
+import CustomerListing from "./components/CustomerListing";
 export default function Home() {
   const [section, setSection] = useState("customer");
   return (
-    <main className=" dark:bg-gradient-to-r  dark:from-gray-800 min-h-screen">
-      <div className="bg-gradient-to-r from-gray-800 to-gray-700 dark:from-gray-800 dark:to-background pb-24 pt-10  px-8 sm:px-24  ">
+    <main className="h-screen overflow-y-auto">
+      <div className="bg-gradient-to-r from-gray-800 to-gray-700 dark:from-background dark:to-background pb-24 pt-10  px-8 sm:px-24  ">
         <section className="flex flex-col gap-3 sm:max-w-6xl mx-auto">
           <div className="flex items-center justify-between gap-3">
             <div
@@ -37,23 +38,19 @@ export default function Home() {
               setSection(s);
             }}
           >
-            <TabsList className="bg-transparent gap-6">
-              <TabsTrigger value="customer" className="text-white">
-                Customer
-              </TabsTrigger>
-              <TabsTrigger value="settings" className="text-white">
-                Settings
-              </TabsTrigger>
+            <TabsList className="bg-transparent dark:bg-gray-800 gap-6">
+              <TabsTrigger value="customer">Customer</TabsTrigger>
+              <TabsTrigger value="settings">Settings</TabsTrigger>
             </TabsList>
             <TabsContent
               value="customer"
-              className="absolute top-14 w-full bg-white h-96 shadow-lg rounded-lg p-4 text-black z-10"
+              className="absolute top-14 w-full  h-[70vh] shadow-lg rounded-lg text-black z-10"
             >
-              Make changes to your account here.
+              <CustomerListing />
             </TabsContent>
             <TabsContent
               value="settings"
-              className="absolute top-14 w-full bg-white h-96 shadow-lg rounded-lg p-4 text-black z-10"
+              className="absolute top-14 w-full bg-background  h-[70vh] dark:text-white border shadow-lg rounded-lg p-4 text-black z-10"
             >
               Change your password here.
             </TabsContent>
