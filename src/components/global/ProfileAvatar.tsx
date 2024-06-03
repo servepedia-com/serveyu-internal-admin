@@ -45,12 +45,6 @@ export function ProfileAvatar() {
         >
           Light
         </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem
-          checked={theme === "system"}
-          onCheckedChange={() => setTheme("system")}
-        >
-          System
-        </DropdownMenuCheckboxItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <LogOut className="mr-2 h-4 w-4" />
