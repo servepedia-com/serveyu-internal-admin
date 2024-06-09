@@ -44,13 +44,13 @@ export default function Home() {
             </TabsList>
             <TabsContent
               value="customer"
-              className="absolute top-10 w-full  h-[70vh] shadow-lg rounded-lg text-black z-10"
+              className="absolute top-10 w-full bg-background h-[70vh] border shadow-lg rounded-lg  z-10"
             >
               <CustomerListing />
             </TabsContent>
             <TabsContent
               value="settings"
-              className="absolute top-10 w-full bg-background  h-[70vh] dark:text-white border shadow-lg rounded-lg p-4 text-black z-10"
+              className="absolute top-10 w-full bg-background   h-[70vh] dark:text-white border shadow-lg rounded-lg p-4  z-10"
             >
               Change your password here.
             </TabsContent>

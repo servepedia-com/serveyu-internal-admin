@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { SaDataTable } from "@/components/SaTable/SaDataTable";
+import  SaDataTable  from "@/components/SaTable/SaDataTable";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.

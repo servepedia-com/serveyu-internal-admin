@@ -1,7 +1,6 @@
-"use client";
+// src/components/SaDataTable.tsx
 
-import React from "react";
-import { useMeasure } from "@uidotdev/usehooks";
+import React, { useEffect } from "react";
 import {
   ColumnDef,
   flexRender,
@@ -20,26 +19,34 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { SaDataTablePagination } from "./SaDataTablePagination";
+import WithAutoSizer from "../hoc/AutoSizerHoc";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   manualPagination?: ManualPaginationI;
+  height?: number;
+  width?: number;
 }
+
 export interface ManualPaginationI {
   enable: boolean;
   paginationState?: PaginationI;
   onChangePageSize: (value: number) => void;
   onChangePageNumber: (value: number) => void;
 }
+
 interface PaginationI {
   pageIndex: number;
   pageSize: number;
 }
-export function SaDataTable<TData, TValue>({
+
+function SaDataTable<TData, TValue>({
   columns,
   data,
   manualPagination,
+  height,
+  width,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -55,7 +62,7 @@ export function SaDataTable<TData, TValue>({
   });
 
   const { rows } = table.getRowModel();
-  const [measureRef, { width, height }] = useMeasure();
+
   const scrollRef = React.useRef<HTMLDivElement | null>(null);
 
   const rowVirtualizer = useVirtualizer({
@@ -71,22 +78,19 @@ export function SaDataTable<TData, TValue>({
     overscan: 5,
   });
 
-  // Combine the refs
-  const combinedRef = React.useCallback(
-    (node: HTMLDivElement | null) => {
-      measureRef(node);
-      scrollRef.current = node;
-    },
-    [measureRef]
-  );
+  // Force a re-render after initial mount to ensure rows are rendered
+  useEffect(() => {
+    rowVirtualizer.scrollToIndex(0);
+    rowVirtualizer.measure();
+  }, []);
 
   return (
     <div
-      ref={combinedRef}
+      ref={scrollRef}
       style={{ height: height || "100%", width: width || "100%" }}
-      className="rounded-md  overflow-auto bg-background dark:text-white pb-2 flex justify-between flex-col border"
+      className="rounded-lg overflow-auto bg-background dark:text-white pb-2 flex justify-between flex-col"
     >
-      <Table className="flex-1 relative overflow-auto">
+      <Table className="flex-1 relative h-full w-full overflow-auto">
         <TableHeader className="sticky top-0 bg-background">
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id} className="hover:bg-transparent">
@@ -134,7 +138,14 @@ export function SaDataTable<TData, TValue>({
           )}
         </TableBody>
       </Table>
-      <SaDataTablePagination manualPagination={manualPagination} table={table} />
+      <SaDataTablePagination
+        manualPagination={manualPagination}
+        table={table}
+      />
     </div>
   );
 }
+
+export default WithAutoSizer(React.memo(SaDataTable)) as <TData, TValue>(
+  props: DataTableProps<TData, TValue>
+) => JSX.Element;
