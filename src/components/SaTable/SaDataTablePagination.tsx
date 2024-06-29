@@ -25,7 +25,7 @@ export function SaDataTablePagination<TData>({
   manualPagination,
 }: DataTablePaginationProps<TData>) {
   return (
-    <div className="flex items-center flex-wrap gap-y-3 justify-between p-2 px-3 border-t">
+    <div className="flex items-center flex-wrap gap-y-3 justify-between p-3 border-t">
       {/* <div className="flex-1 text-sm text-muted-foreground">
         {table.getFilteredSelectedRowModel().rows.length ? (
           <>

@@ -44,7 +44,7 @@ export default function Home() {
             </TabsList>
             <TabsContent
               value="customer"
-              className="absolute top-10 w-full bg-background h-[70vh] border shadow-lg rounded-lg  z-10"
+              className="absolute top-10 w-full bg-background h-[70vh] border  overflow-clip  rounded-lg  z-10"
             >
               <CustomerListing />
             </TabsContent>

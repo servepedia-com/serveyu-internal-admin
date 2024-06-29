@@ -78,48 +78,49 @@ function SaDataTable<TData, TValue>({
     overscan: 5,
   });
 
-  // Force a re-render after initial mount to ensure rows are rendered
-  useEffect(() => {
-    rowVirtualizer.scrollToIndex(0);
-    rowVirtualizer.measure();
-  }, []);
-
   return (
     <div
       ref={scrollRef}
       style={{ height: height || "100%", width: width || "100%" }}
-      className="rounded-lg overflow-auto bg-background dark:text-white pb-2 flex justify-between flex-col"
+      className="rounded-lg overflow-auto bg-background dark:text-white  flex justify-between flex-col"
     >
-      <Table className="flex-1 relative h-full w-full overflow-auto">
-        <TableHeader className="sticky top-0 bg-background">
+      <table className="flex-1 flex flex-col relative h-full w-full overflow-auto">
+        <thead className="sticky text-sm dark:text-gray-300 text-gray-500  top-0  dark:backdrop-blur-lg z-[100px] w-full border-b h-fit bg-background dark:bg-background/40 dark:border-neutral-900">
           {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id} className="hover:bg-transparent">
+            <tr key={headerGroup.id} className="w-full  flex ">
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead key={header.id}>
+                  <th
+                    key={header.id}
+                    className="flex-1 min-w-64 w-full flex justify-start items-center p-4"
+                  >
                     {header.isPlaceholder
                       ? null
                       : flexRender(
                           header.column.columnDef.header,
                           header.getContext()
                         )}
-                  </TableHead>
+                  </th>
                 );
               })}
-            </TableRow>
+            </tr>
           ))}
-        </TableHeader>
-        <TableBody>
+        </thead>
+        <tbody className="flex-1">
           {rows.length ? (
             rowVirtualizer.getVirtualItems().map((virtualRow) => {
               const row = rows[virtualRow.index];
               return (
                 <TableRow
                   key={row.id}
+                  className="flex text-xs"
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell
+                      key={cell.id}
+                      className="flex-1 min-w-64 flex items-center p-4 justify-start"
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -136,8 +137,8 @@ function SaDataTable<TData, TValue>({
               </TableCell>
             </TableRow>
           )}
-        </TableBody>
-      </Table>
+        </tbody>
+      </table>
       <SaDataTablePagination
         manualPagination={manualPagination}
         table={table}
