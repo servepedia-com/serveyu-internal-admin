@@ -2,29 +2,389 @@
 import React, { useState } from "react";
 
 import { ColumnDef } from "@tanstack/react-table";
-import  SaDataTable  from "@/components/SaTable/SaDataTable";
+import SaTable from "@/components/SaTable";
+ 
+interface CustomerEntityI{
+  id: number;
+  customer_name: string;
+  company_email: string;
+  country: string;
+  created_at: string;
+  total_accounts: number;
+  stage: string;
+  status: string;
+  actions: string;
+}
+const dummyData:CustomerEntityI[] = [
+  {
+    id: 1,
+    customer_name: "John Doe",
+    company_email: "john.doe@example.com",
+    country: "USA",
+    created_at: "2023-06-30",
+    total_accounts: 5,
+    stage: "Initial",
+    status: "Active",
+    actions: "View"
+  },
+  {
+    id: 2,
+    customer_name: "Jane Smith",
+    company_email: "jane.smith@example.com",
+    country: "Canada",
+    created_at: "2023-06-28",
+    total_accounts: 3,
+    stage: "Processing",
+    status: "Pending",
+    actions: "View"
+  },
+  {
+    id: 3,
+    customer_name: "Robert Brown",
+    company_email: "robert.brown@example.com",
+    country: "UK",
+    created_at: "2023-06-27",
+    total_accounts: 2,
+    stage: "Completed",
+    status: "Inactive",
+    actions: "View"
+  },
+  {
+    id: 4,
+    customer_name: "Emily Davis",
+    company_email: "emily.davis@example.com",
+    country: "Australia",
+    created_at: "2023-06-26",
+    total_accounts: 4,
+    stage: "Initial",
+    status: "Active",
+    actions: "View"
+  },
+  {
+    id: 5,
+    customer_name: "Michael Wilson",
+    company_email: "michael.wilson@example.com",
+    country: "Germany",
+    created_at: "2023-06-25",
+    total_accounts: 6,
+    stage: "Processing",
+    status: "Pending",
+    actions: "View"
+  },
+  {
+    id: 6,
+    customer_name: "Sarah Miller",
+    company_email: "sarah.miller@example.com",
+    country: "France",
+    created_at: "2023-06-24",
+    total_accounts: 2,
+    stage: "Completed",
+    status: "Inactive",
+    actions: "View"
+  },
+  {
+    id: 7,
+    customer_name: "David Johnson",
+    company_email: "david.johnson@example.com",
+    country: "Spain",
+    created_at: "2023-06-23",
+    total_accounts: 3,
+    stage: "Initial",
+    status: "Active",
+    actions: "View"
+  },
+  {
+    id: 8,
+    customer_name: "Laura Martinez",
+    company_email: "laura.martinez@example.com",
+    country: "Italy",
+    created_at: "2023-06-22",
+    total_accounts: 5,
+    stage: "Processing",
+    status: "Pending",
+    actions: "View"
+  },
+  {
+    id: 9,
+    customer_name: "James Anderson",
+    company_email: "james.anderson@example.com",
+    country: "Netherlands",
+    created_at: "2023-06-21",
+    total_accounts: 1,
+    stage: "Completed",
+    status: "Inactive",
+    actions: "View"
+  },
+  {
+    id: 10,
+    customer_name: "Linda Thompson",
+    company_email: "linda.thompson@example.com",
+    country: "Brazil",
+    created_at: "2023-06-20",
+    total_accounts: 4,
+    stage: "Initial",
+    status: "Active",
+    actions: "View"
+  },
+  {
+    id: 11,
+    customer_name: "Christopher Lee",
+    company_email: "christopher.lee@example.com",
+    country: "China",
+    created_at: "2023-06-19",
+    total_accounts: 3,
+    stage: "Processing",
+    status: "Pending",
+    actions: "View"
+  },
+  {
+    id: 12,
+    customer_name: "Jessica Hernandez",
+    company_email: "jessica.hernandez@example.com",
+    country: "Japan",
+    created_at: "2023-06-18",
+    total_accounts: 2,
+    stage: "Completed",
+    status: "Inactive",
+    actions: "View"
+  },
+  {
+    id: 13,
+    customer_name: "Matthew Lopez",
+    company_email: "matthew.lopez@example.com",
+    country: "Russia",
+    created_at: "2023-06-17",
+    total_accounts: 5,
+    stage: "Initial",
+    status: "Active",
+    actions: "View"
+  },
+  {
+    id: 14,
+    customer_name: "Anna Garcia",
+    company_email: "anna.garcia@example.com",
+    country: "Mexico",
+    created_at: "2023-06-16",
+    total_accounts: 3,
+    stage: "Processing",
+    status: "Pending",
+    actions: "View"
+  },
+  {
+    id: 15,
+    customer_name: "William Martinez",
+    company_email: "william.martinez@example.com",
+    country: "India",
+    created_at: "2023-06-15",
+    total_accounts: 4,
+    stage: "Completed",
+    status: "Inactive",
+    actions: "View"
+  },
+  {
+    id: 16,
+    customer_name: "Elizabeth Taylor",
+    company_email: "elizabeth.taylor@example.com",
+    country: "South Africa",
+    created_at: "2023-06-14",
+    total_accounts: 6,
+    stage: "Initial",
+    status: "Active",
+    actions: "View"
+  },
+  {
+    id: 17,
+    customer_name: "Joseph Brown",
+    company_email: "joseph.brown@example.com",
+    country: "Egypt",
+    created_at: "2023-06-13",
+    total_accounts: 2,
+    stage: "Processing",
+    status: "Pending",
+    actions: "View"
+  },
+  {
+    id: 18,
+    customer_name: "Maria Gonzalez",
+    company_email: "maria.gonzalez@example.com",
+    country: "Argentina",
+    created_at: "2023-06-12",
+    total_accounts: 5,
+    stage: "Completed",
+    status: "Inactive",
+    actions: "View"
+  },
+  {
+    id: 19,
+    customer_name: "Mark Clark",
+    company_email: "mark.clark@example.com",
+    country: "Chile",
+    created_at: "2023-06-11",
+    total_accounts: 1,
+    stage: "Initial",
+    status: "Active",
+    actions: "View"
+  },
+  {
+    id: 20,
+    customer_name: "Patricia Lewis",
+    company_email: "patricia.lewis@example.com",
+    country: "Peru",
+    created_at: "2023-06-10",
+    total_accounts: 4,
+    stage: "Processing",
+    status: "Pending",
+    actions: "View"
+  },
+  {
+    id: 21,
+    customer_name: "Steven Carter",
+    company_email: "steven.carter@example.com",
+    country: "New Zealand",
+    created_at: "2023-06-09",
+    total_accounts: 5,
+    stage: "Initial",
+    status: "Active",
+    actions: "View"
+  },
+  {
+    id: 22,
+    customer_name: "Nancy Wright",
+    company_email: "nancy.wright@example.com",
+    country: "Portugal",
+    created_at: "2023-06-08",
+    total_accounts: 3,
+    stage: "Processing",
+    status: "Pending",
+    actions: "View"
+  },
+  {
+    id: 23,
+    customer_name: "Andrew Walker",
+    company_email: "andrew.walker@example.com",
+    country: "Norway",
+    created_at: "2023-06-07",
+    total_accounts: 2,
+    stage: "Completed",
+    status: "Inactive",
+    actions: "View"
+  },
+  {
+    id: 24,
+    customer_name: "Susan Hall",
+    company_email: "susan.hall@example.com",
+    country: "Sweden",
+    created_at: "2023-06-06",
+    total_accounts: 4,
+    stage: "Initial",
+    status: "Active",
+    actions: "View"
+  },
+  {
+    id: 25,
+    customer_name: "Charles King",
+    company_email: "charles.king@example.com",
+    country: "Switzerland",
+    created_at: "2023-06-05",
+    total_accounts: 6,
+    stage: "Processing",
+    status: "Pending",
+    actions: "View"
+  },
+  {
+    id: 26,
+    customer_name: "Lisa Green",
+    company_email: "lisa.green@example.com",
+    country: "Denmark",
+    created_at: "2023-06-04",
+    total_accounts: 2,
+    stage: "Completed",
+    status: "Inactive",
+    actions: "View"
+  },
+  {
+    id: 27,
+    customer_name: "Brian Baker",
+    company_email: "brian.baker@example.com",
+    country: "Finland",
+    created_at: "2023-06-03",
+    total_accounts: 3,
+    stage: "Initial",
+    status: "Active",
+    actions: "View"
+  },
+  {
+    id: 28,
+    customer_name: "Karen Nelson",
+    company_email: "karen.nelson@example.com",
+    country: "Austria",
+    created_at: "2023-06-02",
+    total_accounts: 5,
+    stage: "Processing",
+    status: "Pending",
+    actions: "View"
+  },
+  {
+    id: 29,
+    customer_name: "Kevin Hill",
+    company_email: "kevin.hill@example.com",
+    country: "Belgium",
+    created_at: "2023-06-01",
+    total_accounts: 1,
+    stage: "Completed",
+    status: "Inactive",
+    actions: "View"
+  },
+  {
+    id: 30,
+    customer_name: "Amy Adams",
+    company_email: "amy.adams@example.com",
+    country: "Greece",
+    created_at: "2023-05-31",
+    total_accounts: 4,
+    stage: "Initial",
+    status: "Active",
+    actions: "View"
+  }
+];
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-export type PaymentT = {
-  id: string;
-  amount: number;
-  status: "pending" | "processing" | "success" | "failed";
-  email: string;
-};
 
-export const columns: ColumnDef<PaymentT>[] = [
+export const columns: ColumnDef<CustomerEntityI>[] = [
+  {
+    accessorKey: "id",
+    header: "Id",
+  },
+  {
+    accessorKey: "customer_name",
+    header: "Customer Name",
+  },
+  {
+    accessorKey: "company_email",
+    header: "Customer Email",
+  },
+  {
+    accessorKey: "country",
+    header: "Country",
+  },
+  {
+    accessorKey: "created_at",
+    header: "Created At",
+  },
+  {
+    accessorKey: "total_accounts",
+    header: "Total Accounts",
+  },
+  {
+    accessorKey: "stage",
+    header: "Stage",
+  },
   {
     accessorKey: "status",
     header: "Status",
   },
   {
-    accessorKey: "email",
-    header: "Email",
-  },
-  {
-    accessorKey: "amount",
-    header: "Amount",
+    accessorKey: "actions",
+    header: "Actions",
   },
 ];
 
@@ -34,7 +394,7 @@ function CustomerListing() {
     pageSize: 10, //default page size
   });
   return (
-    <SaDataTable
+    <SaTable
       columns={columns}
       manualPagination={{
         enable: true,
@@ -44,130 +404,7 @@ function CustomerListing() {
         onChangePageSize: (value) =>
           setPagination((prev) => ({ ...prev, pageSize: value })),
       }}
-      data={
-        [
-          {
-            id: "728ed52f",
-            amount: 100,
-            status: "pending",
-            email: "m@example.com",
-          },
-          {
-            id: "728esd52f",
-            amount: 100,
-            status: "pending",
-            email: "m@sexample.com",
-          },
-          {
-            id: "728sesd52f",
-            amount: 100,
-            status: "pending",
-            email: "m@ssexample.com",
-          },
-          {
-            id: "728efsd52f",
-            amount: 100,
-            status: "pending",
-            email: "m@asexample.com",
-          },
-          {
-            id: "728esfd52f",
-            amount: 100,
-            status: "pending",
-            email: "m@s3exfample.com",
-          },
-          {
-            id: "728evqsd52f",
-            amount: 100,
-            status: "pending",
-            email: "m@s3example.com",
-          },
-          {
-            id: "728egasd52f",
-            amount: 1040,
-            status: "p3ending",
-            email: "m@qwesexample.com",
-          },
-          {
-            id: "728esdv52f",
-            amount: 100,
-            status: "pending",
-            email: "m@sexafasfmple.com",
-          },
-          {
-            id: "728esdfas52f",
-            amount: 1003,
-            status: "pending",
-            email: "m@ssdaexample.com",
-          },
-          {
-            id: "728esdavafas52f",
-            amount: 1003,
-            status: "pending",
-            email: "m@ssdaexample.com",
-          },
-          {
-            id: "72128esdfas52f",
-            amount: 1003,
-            status: "pending",
-            email: "m@ssdaexample.com",
-          },
-          {
-            id: "728esd42fas52f",
-            amount: 1003,
-            status: "pending",
-            email: "m@ssdaexample.com",
-          },
-          {
-            id: "728esdfas12452f",
-            amount: 1003,
-            status: "pending",
-            email: "m@ssdaexample.com",
-          },
-          {
-            id: "728esdqwefas52f",
-            amount: 1003,
-            status: "pending",
-            email: "m@ssdaexample.com",
-          },
-          {
-            id: "728e11sdqwefas52f",
-            amount: 1003,
-            status: "pending",
-            email: "m@ssdaexample.com",
-          },
-          {
-            id: "728es21dqwefas52f",
-            amount: 1003,
-            status: "pending",
-            email: "m@ssdaexample.com",
-          },
-          {
-            id: "73128esdqwefas52f",
-            amount: 11003,
-            status: "pending",
-            email: "m@ssdaexample.com",
-          },
-          {
-            id: "72318esdqwefas52f",
-            amount: 134003,
-            status: "pending",
-            email: "m@ssdaexample.com",
-          },
-          {
-            id: "728e232sdqwefas52f",
-            amount: 142003,
-            status: "pending",
-            email: "m@ssdaexample.com",
-          },
-          {
-            id: "72841esdqwefas52f",
-            amount: 311003,
-            status: "pending",
-            email: "m@ssdaexample.com",
-          },
-        ] as PaymentT[]
-      }
+      data={dummyData}
     />
   );
 }

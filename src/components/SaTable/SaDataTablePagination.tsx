@@ -13,8 +13,18 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
 } from "lucide-react";
-import { ManualPaginationI } from "./SaDataTable";
 
+interface PaginationI {
+  pageIndex: number;
+  pageSize: number;
+}
+
+export interface ManualPaginationI {
+enable: boolean;
+paginationState?: PaginationI;
+onChangePageSize: (value: number) => void;
+onChangePageNumber: (value: number) => void;
+}
 interface DataTablePaginationProps<TData> {
   table: Table<TData>;
   manualPagination?: ManualPaginationI;
