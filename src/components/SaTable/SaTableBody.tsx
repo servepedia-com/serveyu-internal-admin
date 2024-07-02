@@ -1,7 +1,7 @@
-import React, { useMemo } from "react";
-import { flexRender, Table, Row, Header } from "@tanstack/react-table";
-import { useVirtualizer, Virtualizer, VirtualItem } from "@tanstack/react-virtual";
-import WithAutoSizer from "../hoc/AutoSizerHoc";
+import React from "react";
+import { flexRender,  Row,  } from "@tanstack/react-table";
+import {  Virtualizer, VirtualItem } from "@tanstack/react-virtual";
+import { TableRow } from "../ui/table";
 
 
 interface TableBodyProps<T> {
@@ -35,7 +35,7 @@ function TableBody<T>(props:TableBodyProps<T>){
             const row = rows[virtualRow.index];
             const visibleCells = row.getVisibleCells();
             return (
-              <tr
+              <TableRow
                 data-index={virtualRow.index}
                 ref={(node) => rowVirtualizer.measureElement(node)}
                 key={row.id}
@@ -71,7 +71,7 @@ function TableBody<T>(props:TableBodyProps<T>){
                 {virtualPaddingRight ? (
                   <td style={{ display: "flex", width: virtualPaddingRight }} />
                 ) : null}
-              </tr>
+              </TableRow>
             );
           })}
         </tbody>

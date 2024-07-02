@@ -3,29 +3,29 @@ import React, { useState } from "react";
 
 import { ColumnDef } from "@tanstack/react-table";
 import SaTable from "@/components/SaTable";
- 
-interface CustomerEntityI{
+
+interface CustomerEntityI {
   id: number;
   customer_name: string;
   company_email: string;
   country: string;
   created_at: string;
-  total_accounts: number;
+  total_users: number;
   stage: string;
   status: string;
   actions: string;
 }
-const dummyData:CustomerEntityI[] = [
+const dummyData: CustomerEntityI[] = [
   {
     id: 1,
     customer_name: "John Doe",
     company_email: "john.doe@example.com",
     country: "USA",
     created_at: "2023-06-30",
-    total_accounts: 5,
+    total_users: 5,
     stage: "Initial",
     status: "Active",
-    actions: "View"
+    actions: "View",
   },
   {
     id: 2,
@@ -33,10 +33,10 @@ const dummyData:CustomerEntityI[] = [
     company_email: "jane.smith@example.com",
     country: "Canada",
     created_at: "2023-06-28",
-    total_accounts: 3,
+    total_users: 3,
     stage: "Processing",
     status: "Pending",
-    actions: "View"
+    actions: "View",
   },
   {
     id: 3,
@@ -44,10 +44,10 @@ const dummyData:CustomerEntityI[] = [
     company_email: "robert.brown@example.com",
     country: "UK",
     created_at: "2023-06-27",
-    total_accounts: 2,
+    total_users: 2,
     stage: "Completed",
     status: "Inactive",
-    actions: "View"
+    actions: "View",
   },
   {
     id: 4,
@@ -55,10 +55,10 @@ const dummyData:CustomerEntityI[] = [
     company_email: "emily.davis@example.com",
     country: "Australia",
     created_at: "2023-06-26",
-    total_accounts: 4,
+    total_users: 4,
     stage: "Initial",
     status: "Active",
-    actions: "View"
+    actions: "View",
   },
   {
     id: 5,
@@ -66,10 +66,10 @@ const dummyData:CustomerEntityI[] = [
     company_email: "michael.wilson@example.com",
     country: "Germany",
     created_at: "2023-06-25",
-    total_accounts: 6,
+    total_users: 6,
     stage: "Processing",
     status: "Pending",
-    actions: "View"
+    actions: "View",
   },
   {
     id: 6,
@@ -77,10 +77,10 @@ const dummyData:CustomerEntityI[] = [
     company_email: "sarah.miller@example.com",
     country: "France",
     created_at: "2023-06-24",
-    total_accounts: 2,
+    total_users: 2,
     stage: "Completed",
     status: "Inactive",
-    actions: "View"
+    actions: "View",
   },
   {
     id: 7,
@@ -88,10 +88,10 @@ const dummyData:CustomerEntityI[] = [
     company_email: "david.johnson@example.com",
     country: "Spain",
     created_at: "2023-06-23",
-    total_accounts: 3,
+    total_users: 3,
     stage: "Initial",
     status: "Active",
-    actions: "View"
+    actions: "View",
   },
   {
     id: 8,
@@ -99,10 +99,10 @@ const dummyData:CustomerEntityI[] = [
     company_email: "laura.martinez@example.com",
     country: "Italy",
     created_at: "2023-06-22",
-    total_accounts: 5,
+    total_users: 5,
     stage: "Processing",
     status: "Pending",
-    actions: "View"
+    actions: "View",
   },
   {
     id: 9,
@@ -110,10 +110,10 @@ const dummyData:CustomerEntityI[] = [
     company_email: "james.anderson@example.com",
     country: "Netherlands",
     created_at: "2023-06-21",
-    total_accounts: 1,
+    total_users: 1,
     stage: "Completed",
     status: "Inactive",
-    actions: "View"
+    actions: "View",
   },
   {
     id: 10,
@@ -121,10 +121,10 @@ const dummyData:CustomerEntityI[] = [
     company_email: "linda.thompson@example.com",
     country: "Brazil",
     created_at: "2023-06-20",
-    total_accounts: 4,
+    total_users: 4,
     stage: "Initial",
     status: "Active",
-    actions: "View"
+    actions: "View",
   },
   {
     id: 11,
@@ -132,10 +132,10 @@ const dummyData:CustomerEntityI[] = [
     company_email: "christopher.lee@example.com",
     country: "China",
     created_at: "2023-06-19",
-    total_accounts: 3,
+    total_users: 3,
     stage: "Processing",
     status: "Pending",
-    actions: "View"
+    actions: "View",
   },
   {
     id: 12,
@@ -143,10 +143,10 @@ const dummyData:CustomerEntityI[] = [
     company_email: "jessica.hernandez@example.com",
     country: "Japan",
     created_at: "2023-06-18",
-    total_accounts: 2,
+    total_users: 2,
     stage: "Completed",
     status: "Inactive",
-    actions: "View"
+    actions: "View",
   },
   {
     id: 13,
@@ -154,10 +154,10 @@ const dummyData:CustomerEntityI[] = [
     company_email: "matthew.lopez@example.com",
     country: "Russia",
     created_at: "2023-06-17",
-    total_accounts: 5,
+    total_users: 5,
     stage: "Initial",
     status: "Active",
-    actions: "View"
+    actions: "View",
   },
   {
     id: 14,
@@ -165,10 +165,10 @@ const dummyData:CustomerEntityI[] = [
     company_email: "anna.garcia@example.com",
     country: "Mexico",
     created_at: "2023-06-16",
-    total_accounts: 3,
+    total_users: 3,
     stage: "Processing",
     status: "Pending",
-    actions: "View"
+    actions: "View",
   },
   {
     id: 15,
@@ -176,10 +176,10 @@ const dummyData:CustomerEntityI[] = [
     company_email: "william.martinez@example.com",
     country: "India",
     created_at: "2023-06-15",
-    total_accounts: 4,
+    total_users: 4,
     stage: "Completed",
     status: "Inactive",
-    actions: "View"
+    actions: "View",
   },
   {
     id: 16,
@@ -187,10 +187,10 @@ const dummyData:CustomerEntityI[] = [
     company_email: "elizabeth.taylor@example.com",
     country: "South Africa",
     created_at: "2023-06-14",
-    total_accounts: 6,
+    total_users: 6,
     stage: "Initial",
     status: "Active",
-    actions: "View"
+    actions: "View",
   },
   {
     id: 17,
@@ -198,10 +198,10 @@ const dummyData:CustomerEntityI[] = [
     company_email: "joseph.brown@example.com",
     country: "Egypt",
     created_at: "2023-06-13",
-    total_accounts: 2,
+    total_users: 2,
     stage: "Processing",
     status: "Pending",
-    actions: "View"
+    actions: "View",
   },
   {
     id: 18,
@@ -209,10 +209,10 @@ const dummyData:CustomerEntityI[] = [
     company_email: "maria.gonzalez@example.com",
     country: "Argentina",
     created_at: "2023-06-12",
-    total_accounts: 5,
+    total_users: 5,
     stage: "Completed",
     status: "Inactive",
-    actions: "View"
+    actions: "View",
   },
   {
     id: 19,
@@ -220,10 +220,10 @@ const dummyData:CustomerEntityI[] = [
     company_email: "mark.clark@example.com",
     country: "Chile",
     created_at: "2023-06-11",
-    total_accounts: 1,
+    total_users: 1,
     stage: "Initial",
     status: "Active",
-    actions: "View"
+    actions: "View",
   },
   {
     id: 20,
@@ -231,10 +231,10 @@ const dummyData:CustomerEntityI[] = [
     company_email: "patricia.lewis@example.com",
     country: "Peru",
     created_at: "2023-06-10",
-    total_accounts: 4,
+    total_users: 4,
     stage: "Processing",
     status: "Pending",
-    actions: "View"
+    actions: "View",
   },
   {
     id: 21,
@@ -242,10 +242,10 @@ const dummyData:CustomerEntityI[] = [
     company_email: "steven.carter@example.com",
     country: "New Zealand",
     created_at: "2023-06-09",
-    total_accounts: 5,
+    total_users: 5,
     stage: "Initial",
     status: "Active",
-    actions: "View"
+    actions: "View",
   },
   {
     id: 22,
@@ -253,10 +253,10 @@ const dummyData:CustomerEntityI[] = [
     company_email: "nancy.wright@example.com",
     country: "Portugal",
     created_at: "2023-06-08",
-    total_accounts: 3,
+    total_users: 3,
     stage: "Processing",
     status: "Pending",
-    actions: "View"
+    actions: "View",
   },
   {
     id: 23,
@@ -264,10 +264,10 @@ const dummyData:CustomerEntityI[] = [
     company_email: "andrew.walker@example.com",
     country: "Norway",
     created_at: "2023-06-07",
-    total_accounts: 2,
+    total_users: 2,
     stage: "Completed",
     status: "Inactive",
-    actions: "View"
+    actions: "View",
   },
   {
     id: 24,
@@ -275,10 +275,10 @@ const dummyData:CustomerEntityI[] = [
     company_email: "susan.hall@example.com",
     country: "Sweden",
     created_at: "2023-06-06",
-    total_accounts: 4,
+    total_users: 4,
     stage: "Initial",
     status: "Active",
-    actions: "View"
+    actions: "View",
   },
   {
     id: 25,
@@ -286,10 +286,10 @@ const dummyData:CustomerEntityI[] = [
     company_email: "charles.king@example.com",
     country: "Switzerland",
     created_at: "2023-06-05",
-    total_accounts: 6,
+    total_users: 6,
     stage: "Processing",
     status: "Pending",
-    actions: "View"
+    actions: "View",
   },
   {
     id: 26,
@@ -297,10 +297,10 @@ const dummyData:CustomerEntityI[] = [
     company_email: "lisa.green@example.com",
     country: "Denmark",
     created_at: "2023-06-04",
-    total_accounts: 2,
+    total_users: 2,
     stage: "Completed",
     status: "Inactive",
-    actions: "View"
+    actions: "View",
   },
   {
     id: 27,
@@ -308,10 +308,10 @@ const dummyData:CustomerEntityI[] = [
     company_email: "brian.baker@example.com",
     country: "Finland",
     created_at: "2023-06-03",
-    total_accounts: 3,
+    total_users: 3,
     stage: "Initial",
     status: "Active",
-    actions: "View"
+    actions: "View",
   },
   {
     id: 28,
@@ -319,10 +319,10 @@ const dummyData:CustomerEntityI[] = [
     company_email: "karen.nelson@example.com",
     country: "Austria",
     created_at: "2023-06-02",
-    total_accounts: 5,
+    total_users: 5,
     stage: "Processing",
     status: "Pending",
-    actions: "View"
+    actions: "View",
   },
   {
     id: 29,
@@ -330,10 +330,10 @@ const dummyData:CustomerEntityI[] = [
     company_email: "kevin.hill@example.com",
     country: "Belgium",
     created_at: "2023-06-01",
-    total_accounts: 1,
+    total_users: 1,
     stage: "Completed",
     status: "Inactive",
-    actions: "View"
+    actions: "View",
   },
   {
     id: 30,
@@ -341,13 +341,12 @@ const dummyData:CustomerEntityI[] = [
     company_email: "amy.adams@example.com",
     country: "Greece",
     created_at: "2023-05-31",
-    total_accounts: 4,
+    total_users: 4,
     stage: "Initial",
     status: "Active",
-    actions: "View"
-  }
+    actions: "View",
+  },
 ];
-
 
 export const columns: ColumnDef<CustomerEntityI>[] = [
   {
@@ -371,8 +370,8 @@ export const columns: ColumnDef<CustomerEntityI>[] = [
     header: "Created At",
   },
   {
-    accessorKey: "total_accounts",
-    header: "Total Accounts",
+    accessorKey: "total_users",
+    header: "Total Users",
   },
   {
     accessorKey: "stage",
